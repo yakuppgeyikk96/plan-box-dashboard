@@ -1,0 +1,31 @@
+<div
+  id="sidebar"
+  class="sidebar-container bg-dark text-white h-100"
+  [ngClass]="showSidebar ? 'w-14rem' : 'w-4rem'"
+>
+  <div
+    class="sidebar-container-logo d-flex justify-content-center align-items-center"
+  >
+    P<span [ngClass]="showSidebar ? 'w-4rem' : 'w-zero'">lan</span>B<span
+      [class.w-zero]="!showSidebar"
+      >ox</span
+    >
+  </div>
+  <div class="sidebar-container-list">
+    <ul class="options">
+      <li
+        *ngFor="let item of sidebarItems"
+        class="options-item my-10p"
+        [ngClass]="showSidebar ? 'w-14rem' : 'w-4rem'"
+      >
+        <div class="options-item-icon mx-10p p-10p" [routerLink]="item.link">
+          <img
+            [src]="'../../../../../assets/icons/' + item.icon + '.svg'"
+            alt=""
+          />
+        </div>
+        <div class="options-item-text">{{ item.text }}</div>
+      </li>
+    </ul>
+  </div>
+</div>
