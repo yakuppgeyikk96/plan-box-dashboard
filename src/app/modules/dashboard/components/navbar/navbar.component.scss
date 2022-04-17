@@ -1,3 +1,13 @@
 .navbar-container {
   height: 3rem;
 }
+
+.profile-icon {
+  cursor: pointer;
+  padding: 0 0.5rem;
+  img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+  }
+}

@@ -10,12 +10,12 @@ export class SidebarComponent implements OnInit {
   showSidebar: boolean = false;
   sidebarItems: { icon: string; text: string; link: string }[] = [
     {
-      icon: 'u_home',
+      icon: 'fa-solid fa-house',
       text: 'Home',
       link: '',
     },
     {
-      icon: 'u_file-check-alt',
+      icon: 'fa-solid fa-list-check',
       text: 'Tasks',
       link: 'task',
     },

@@ -38,3 +38,24 @@
 .p-10p {
   padding: 0.625rem;
 }
+
+/* Image & Icons */
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-primary {
+  color: rgb(0, 102, 255);
+}
+
+.icon-dark {
+  color: #000000;
+}
+
+/* Interactions */
+.active-link {
+}
