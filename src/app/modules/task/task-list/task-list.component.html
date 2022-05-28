@@ -1,1 +1,11 @@
-<p>task-list works!</p>
+<div class="page-container">
+  <div class="page-container-tasks">
+    <list-box
+      [data]="tasks"
+      [showOrder]="true"
+      (removeItem)="onTaskRemove($event)"
+      (selectItem)="onTaskSelected($event)">
+    </list-box>
+  </div>
+  <div class="page-container-subtasks"></div>
+</div>
