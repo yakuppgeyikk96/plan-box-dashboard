@@ -1,13 +1,13 @@
 .list-box {
-  margin: 1rem auto;
+  margin: 0 auto;
   padding: 1rem 0;
-  width: 90%;
+  width: 80%;
 }
 
 .accordion {
   margin: 0.5rem;
   border-radius: 3px;
-  box-shadow: rgba(14, 30, 37, 0.12) 0 2px 4px 0, rgba(14, 30, 37, 0.32) 0 2px 16px 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
   transition: all .2s;
 
   &-header {
@@ -56,12 +56,12 @@
       align-items: center;
       padding: 1rem;
       border-radius: 3px;
-      box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0, rgba(0, 0, 0, 0.1) 0 0 1px 0;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
 
       &-line {
         height: 8px;
         width: 100%;
-        background-color: black;
+        background-color: #a9a9a9;
         position: relative;
 
         &-progress {
@@ -85,7 +85,14 @@
       padding: 1rem;
       text-align: justify;
       border-radius: 3px;
-      box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0, rgba(0, 0, 0, 0.1) 0 0 1px 0;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
+    }
+
+    &-actions {
+      display: flex;
+      padding: 1rem;
+      justify-content: flex-end;
+      cursor: pointer;
     }
   }
 }

@@ -1,1 +1,8 @@
+.main-container {
+  height: calc(100vh - 3rem);
+  overflow: auto;
+}
 
+::-webkit-scrollbar {
+  display: none;
+}

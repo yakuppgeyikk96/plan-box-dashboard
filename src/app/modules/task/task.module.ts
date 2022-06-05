@@ -4,18 +4,35 @@ import { TaskComponent } from './task.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './task-list/task-list.component';
 import { ComponentModule } from '../../common/components/component.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
+import {ListBoxComponent} from "./task-list/list-box/list-box.component";
+import {TooltipModule} from "ngx-bootstrap/tooltip"
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 
 const routes: Routes = [
   {
     path: '',
     component: TaskListComponent,
-    children: [],
   },
+  {
+    path: 'task-detail',
+    component: TaskDetailComponent
+  }
 ];
 
 @NgModule({
-  declarations: [TaskComponent, TaskListComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ComponentModule],
+  declarations: [
+    TaskComponent,
+    TaskListComponent,
+    TaskDetailComponent,
+    ListBoxComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ComponentModule,
+    TooltipModule,
+    BsDatepickerModule.forRoot()
+  ],
 })
 export class TaskModule {}

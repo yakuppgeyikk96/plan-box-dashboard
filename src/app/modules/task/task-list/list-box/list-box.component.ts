@@ -1,13 +1,13 @@
 import {
-  AfterViewInit,
   Component, ElementRef,
   EventEmitter,
   Input,
   OnInit,
-  Output, Renderer2,
+  Output,
   ViewChild,
 } from '@angular/core';
-import {Task} from "../../../modules/task/models/task.model";
+import {Task} from "../../models/task.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'list-box',
@@ -29,7 +29,7 @@ export class ListBoxComponent implements OnInit {
 
   progressRates: number[];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -38,10 +38,14 @@ export class ListBoxComponent implements OnInit {
   }
 
   itemSelected(item: Task, index: number): void {
-    this.openedIndex = index;
-    this.selectItem.emit(item);
+    if (this.openedIndex === index) {
+      this.openedIndex = -1;
+      this.selectItem.emit(item);
+    }
+    else {
+      this.openedIndex = index;
+    }
   }
-
 
   trackItem(index: number, item: Task) {
     const {startDate, endDate} = item;
@@ -58,5 +62,11 @@ export class ListBoxComponent implements OnInit {
     if (element) {
       element.style.width = `${(diffByToday / totalDiff) * 100}%`;
     }
+  }
+
+  showDetails(item: Task): void {
+    this.router.navigateByUrl('task/task-detail', {
+      state: {task: item}
+    });
   }
 }

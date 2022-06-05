@@ -10,6 +10,8 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
+  filterBeginDate: Date | undefined;
+  filterEndDate: Date | undefined;
 
   constructor(
     private taskService: TaskService,
@@ -38,5 +40,15 @@ export class TaskListComponent implements OnInit {
 
   onTaskSelected(task: Task) {
     // console.log(task)
+  }
+
+  foo(dates: (Date | undefined)[] | undefined) {
+    if (dates) {
+      this.filterBeginDate = dates[0]
+      this.filterEndDate = dates[1];
+    }
+
+    console.log(this.filterBeginDate);
+    console.log(this.filterEndDate);
   }
 }
