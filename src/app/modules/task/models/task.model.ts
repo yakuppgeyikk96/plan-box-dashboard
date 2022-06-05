@@ -8,3 +8,10 @@ export interface Task {
   status: number;
   order: number;
 }
+
+export interface CreateTask {
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+}

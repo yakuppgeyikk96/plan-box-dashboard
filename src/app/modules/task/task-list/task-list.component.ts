@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Task } from '../models/task.model';
 import { TaskService } from '../services/task.service';
+import { BsModalRef, ModalOptions, BsModalService } from 'ngx-bootstrap/modal';
+import { TaskCreateComponent } from '../task-create/task-create.component';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
+  providers: [BsModalService],
 })
 export class TaskListComponent implements OnInit {
+  bsTaskCreateModal?: BsModalRef;
   tasks: Task[] = [];
   filterBeginDate: Date | undefined;
   filterEndDate: Date | undefined;
 
   constructor(
     private taskService: TaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -23,12 +30,11 @@ export class TaskListComponent implements OnInit {
   }
 
   onTaskRemove(task: Task) {
-    this.taskService.removeTask(task.id)
-      .subscribe(res => {
-        if (res) {
-          this.getAllTask();
-        }
-      });
+    this.taskService.removeTask(task.id).subscribe((res) => {
+      if (res) {
+        this.getAllTask();
+      }
+    });
   }
 
   getAllTask(): void {
@@ -44,11 +50,26 @@ export class TaskListComponent implements OnInit {
 
   foo(dates: (Date | undefined)[] | undefined) {
     if (dates) {
-      this.filterBeginDate = dates[0]
+      this.filterBeginDate = dates[0];
       this.filterEndDate = dates[1];
     }
 
     console.log(this.filterBeginDate);
     console.log(this.filterEndDate);
+  }
+
+  createTask(): void {
+    // this.router.navigate(['task', 'task-create']);
+    const initialState: ModalOptions = {
+      initialState: {
+        title: 'Create Task',
+      },
+    };
+
+    this.bsTaskCreateModal = this.modalService.show(
+      TaskCreateComponent,
+      initialState
+    );
+    this.bsTaskCreateModal.content.closeBtnName = 'Close';
   }
 }

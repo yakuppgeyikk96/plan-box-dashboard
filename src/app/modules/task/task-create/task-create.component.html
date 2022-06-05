@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button
+    type="button"
+    class="btn-close close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container p-5">
+    <div class="form-container">
+      <form [formGroup]="createTaskForm" (ngSubmit)="createTask()">
+        <div class="mb-3">
+          <input
+            formControlName="title"
+            type="text"
+            class="form-control"
+            id="task-title"
+            placeholder="Title"
+          />
+        </div>
+        <div class="mb-3">
+          <textarea
+            formControlName="description"
+            type="text"
+            class="form-control"
+            id="task-description"
+            placeholder="Description"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <input
+            formControlName="startDate"
+            type="text"
+            placeholder="Start date"
+            class="form-control"
+            bsDatepicker
+            [bsConfig]="{ isAnimated: true }"
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            formControlName="endDate"
+            type="text"
+            placeholder="End date"
+            class="form-control"
+            bsDatepicker
+            [bsConfig]="{ isAnimated: true }"
+          />
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-success w-50 mt-3">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
