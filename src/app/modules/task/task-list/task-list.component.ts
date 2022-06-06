@@ -15,13 +15,10 @@ import { TaskCreateComponent } from '../task-create/task-create.component';
 export class TaskListComponent implements OnInit {
   bsTaskCreateModal?: BsModalRef;
   tasks: Task[] = [];
-  filterBeginDate: Date | undefined;
-  filterEndDate: Date | undefined;
+  filterDateRange: Date[] = [];
 
   constructor(
     private taskService: TaskService,
-    private authService: AuthService,
-    private router: Router,
     private modalService: BsModalService
   ) {}
 
@@ -30,32 +27,26 @@ export class TaskListComponent implements OnInit {
   }
 
   onTaskRemove(task: Task) {
-    this.taskService.removeTask(task.id).subscribe((res) => {
+    console.log(task);
+    this.taskService.removeTask(task._id).subscribe((res) => {
       if (res) {
+        console.log(res);
         this.getAllTask();
       }
     });
   }
 
   getAllTask(): void {
-    const currentUser = this.authService.getCurrentUser();
-    this.taskService
-      .getTasksByUserId(currentUser.id)
-      .subscribe((tasks) => (this.tasks = tasks));
+    // const currentUser = this.authService.getCurrentUser();
+    // this.taskService
+    //   .getTasksByUserId(currentUser.id)
+    //   .subscribe((tasks) => (this.tasks = tasks));
+
+    this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
 
   onTaskSelected(task: Task) {
     // console.log(task)
-  }
-
-  foo(dates: (Date | undefined)[] | undefined) {
-    if (dates) {
-      this.filterBeginDate = dates[0];
-      this.filterEndDate = dates[1];
-    }
-
-    console.log(this.filterBeginDate);
-    console.log(this.filterEndDate);
   }
 
   createTask(): void {
@@ -70,6 +61,23 @@ export class TaskListComponent implements OnInit {
       TaskCreateComponent,
       initialState
     );
+
     this.bsTaskCreateModal.content.closeBtnName = 'Close';
+
+    this.bsTaskCreateModal.onHide?.subscribe(() => this.getAllTask());
+  }
+
+  filterDateChange(value: (Date | undefined)[] | undefined): void {
+    if (value) {
+      value.forEach((val) => {
+        if (val) {
+          this.filterDateRange.push(val);
+        }
+      });
+    }
+  }
+
+  filterByDateRange(): void {
+    console.log(this.filterDateRange);
   }
 }

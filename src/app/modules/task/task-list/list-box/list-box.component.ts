@@ -1,13 +1,14 @@
 import {
-  Component, ElementRef,
+  Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import {Task} from "../../models/task.model";
-import {Router} from "@angular/router";
+import { Task } from '../../models/task.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'list-box',
@@ -41,21 +42,22 @@ export class ListBoxComponent implements OnInit {
     if (this.openedIndex === index) {
       this.openedIndex = -1;
       this.selectItem.emit(item);
-    }
-    else {
+    } else {
       this.openedIndex = index;
     }
   }
 
   trackItem(index: number, item: Task) {
-    const {startDate, endDate} = item;
-    const totalDiff = endDate.getTime()-startDate.getTime();
+    const { startDate, endDate } = item;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const totalDiff = end.getTime() - start.getTime();
     let diffByToday;
-    if (new Date() <= startDate) {
+    if (new Date() <= start) {
       diffByToday = 0;
-    }
-    else {
-      diffByToday = new Date().getTime()-startDate.getTime();
+    } else {
+      diffByToday = new Date().getTime() - start.getTime();
     }
 
     const element = document.getElementById(`progress-line-${index}`);
@@ -66,7 +68,7 @@ export class ListBoxComponent implements OnInit {
 
   showDetails(item: Task): void {
     this.router.navigateByUrl('task/task-detail', {
-      state: {task: item}
+      state: { task: item },
     });
   }
 }

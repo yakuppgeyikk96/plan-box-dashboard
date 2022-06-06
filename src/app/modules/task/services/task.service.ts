@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tasks } from '../datas/tasks';
@@ -22,14 +22,24 @@ export class TaskService {
     return of<Task[]>(userTasks);
   }
 
-  removeTask(taskId: string): Observable<boolean> {
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === taskId) {
-        tasks.splice(i, 1);
-      }
-    }
+  getAllTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>('http://localhost:3000/task');
+  }
 
-    return of(true);
+  removeTask(taskId: string): Observable<Task> {
+    // for (let i = 0; i < tasks.length; i++) {
+    //   if (tasks[i].id === taskId) {
+    //     tasks.splice(i, 1);
+    //   }
+    // }
+
+    // return of(true);
+
+    console.log(taskId);
+
+    const params = new HttpParams().set('id', taskId);
+
+    return this.http.delete<Task>('http://localhost:3000/task', { params });
   }
 
   createTask(task: CreateTask): Observable<Task> {

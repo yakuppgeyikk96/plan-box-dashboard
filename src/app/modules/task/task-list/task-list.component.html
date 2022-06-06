@@ -7,7 +7,7 @@
           placeholder="Daterangepicker"
           class="form-control"
           bsDaterangepicker
-          (bsValueChange)="foo($event)"
+          (bsValueChange)="filterDateChange($event)"
           [bsConfig]="{ isAnimated: true }"
         />
       </div>
@@ -16,8 +16,9 @@
       >
         <button
           type="button"
-          class="btn btn-outline-primary w-25"
-          [disabled]="!filterBeginDate && !filterEndDate"
+          class="btn btn-success w-25"
+          [disabled]="filterDateRange.length === 0"
+          (click)="filterByDateRange()"
         >
           Filter
         </button>
